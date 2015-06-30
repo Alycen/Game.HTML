@@ -2,8 +2,8 @@ var game;
 var SPLASH_SCREEN = 0, START_SCREEN = 1, LEVEL_ONE = 2, LEVEL_TWO = 3, MAIN_MENU = 4, END_SCREEN =5;
 var startScreen, level_1, level_2;
 
-var requestAnimFrame = (function(){
-    return window.requestAnimationFrame       ||
+var requestAnimFrame = (function() {
+    return window.requestAnimationFrame    ||
         window.webkitRequestAnimationFrame ||
         window.mozRequestAnimationFrame    ||
         window.oRequestAnimationFrame      ||
@@ -24,14 +24,31 @@ function main() {
     game = new Game();
     game.touches = [];
 
+    game.initCanvas();
+    game.Draw();
+    game.gameLoop();
 }
 
 Game.prototype.initCanvas = function() {
+    this.canvas = document.createElement('canvas');
+    this.ctx = this.canvas.getContext('2d');
+    document.body.appendChild(this.canvas);
 
+    this.canvas.width = this.screenWidth;
+    this.canvas.height  = this.screenHeight;
+    touchable = 'createTouch' in document;
+
+    if(touchable) {
+        this.canvas.addEventListener("onTouchStart",onTouchStart,false);
+        this.canvas.addEventListener("onTouchMove",onTouchMove,false);
+        this.canvas.addEventListener("onTouchEnd",onTouchEnd,false);
+    }
 }
 
 Game.prototype.gameLoop = function() {
+    game.Draw();
 
+    window.requestAnimFrame(game.gameLoop);
 }
 
 Game.prototype.Draw = function() {
@@ -41,6 +58,7 @@ Game.prototype.Draw = function() {
 /*Game.prototype.setMultiplayer = function(state) {
 
 }*/
+
 
 
 
