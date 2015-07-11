@@ -77,6 +77,7 @@ Game.prototype.checkStartMenuInput = function() {
 
 function onTouchStart(e) {
     e.preventDefault();
+    game.touch.touches = e.touches;
 }
 
 function onTouchMove(e) {
@@ -86,9 +87,7 @@ function onTouchMove(e) {
 
 function onTouchEnd(e) {
     e.preventDefault();
-}
-
-function tapOrClick(e) {
-    e.preventDefault();
-    return false;
+    game.touch.touches = e.touches;
+    console.log("HALP");
+    //put an end check in here
 }
