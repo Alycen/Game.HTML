@@ -55,16 +55,18 @@ Game.prototype.Draw = function() {
 
 Game.prototype.checkStartMenuInput = function() {
     if(game.touch.getX() > game.screenWidth / 2) {
-        game.level.setLevel(0);
-        console.log(1);
+        //game.level.setLevel(0);
+        console.log("SETTINGS");
     }
     else if(game.touch.getX() < game.screenWidth / 2) {
         if(game.touch.getY() < game.screenHeight / 2) {
-            game.level.setLevel(2);
-            console.log(2);
+            //game.level.setLevel(2);
+            console.log("LEVEL 1");
         }
-        else if(game.touch.getY() > game.screenHeight / 2) 
-            window.history.back(-1);
+        else if(game.touch.getY() > game.screenHeight / 2) {
+            console.log("EXIT");
+            //window.history.back(-1);
+        }
     }
 }
 
@@ -73,10 +75,8 @@ Game.prototype.checkStartMenuInput = function() {
 
 
 
-
 function onTouchStart(e) {
     e.preventDefault();
-    game.touch.touches = e.touches;
 }
 
 function onTouchMove(e) {
@@ -86,5 +86,9 @@ function onTouchMove(e) {
 
 function onTouchEnd(e) {
     e.preventDefault();
-    game.touch.touches = e.touches;
+}
+
+function tapOrClick(e) {
+    e.preventDefault();
+    return false;
 }
