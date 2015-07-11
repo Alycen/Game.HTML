@@ -5,8 +5,8 @@ function Level() {
     this.height = game.screenHeight;
     this.scale = 1;
     this.isVisible = false;
-    this.img = new Image();
-    this.img.src = "assets/gfx/game/level.png"
+    this.bg = new Image();
+    this.bg.src = "assets/gfx/Background/temp.png"
 }
 
 Level.prototype.Update = function() {
@@ -14,5 +14,5 @@ Level.prototype.Update = function() {
 }
 
 Level.prototype.Draw = function() {
-    
+    game.ctx.drawImage(this.bg,this.x,this.y,this.width,this.height);
 }

@@ -10,23 +10,26 @@ var requestAnimFrame = (function() {
         window.msRequestAnimationFrame     ||
         function(callback){
             window.setTimeout(callback, 1000 / 60);
-        };
+        }; 
 })();
 
 function Game() {
     this.screenWidth = window.innerWidth;
     this.screenHeight = window.innerHeight;
-    this.scene = LEVEL_ONE;
     //this.isMultiplayer = false;
 }
 
 function main() {
+
     game = new Game();
     game.touches = [];
+
+    game.level = new Level();
 
     game.initCanvas();
     game.Draw();
     game.gameLoop();
+
 }
 
 Game.prototype.initCanvas = function() {
@@ -52,7 +55,8 @@ Game.prototype.gameLoop = function() {
 }
 
 Game.prototype.Draw = function() {
-
+    this.ctx.clearRect(0,0,this.screenWidth,this.screenHeight);
+    this.level.Draw();
 }
 
 /*Game.prototype.setMultiplayer = function(state) {
