@@ -23,43 +23,52 @@ function Game() {
 function main() {
     game = new Game();
     game.level = new Level();
+    game.level.setLevel(1);
     game.initCanvas();
-    
     game.touch.main();
-
     game.gameLoop();
-
 }
 
 Game.prototype.initCanvas = function() {
     this.canvas = document.createElement('canvas');
     this.ctx = this.canvas.getContext('2d');
-
     document.body.appendChild(this.canvas);
-
     this.canvas.width = this.screenWidth;
     this.canvas.height  = this.screenHeight;
 }
 
-Game.prototype.gameLoop = function() {
-    game.level.setLevel(1);
-    game.Draw();
-
+Game.prototype.gameLoop = function() {    game.Draw();
+    game.checkStartMenuInput();
     window.requestAnimFrame(game.gameLoop);
 }
 
 Game.prototype.Draw = function() {
     this.ctx.clearRect(0,0,this.screenWidth,this.screenHeight);
-
     game.level.Draw();
-
     game.touch.Draw()
-    
 }
 
 /*Game.prototype.setMultiplayer = function(state) {
 
 }*/
+
+
+Game.prototype.checkStartMenuInput = function() {
+    if(game.touch.getX() > game.screenWidth / 2) {
+        game.level.setLevel(0);
+        console.log(1);
+    }
+    else if(game.touch.getX() < game.screenWidth / 2) {
+        if(game.touch.getY() < game.screenHeight / 2) {
+            game.level.setLevel(2);
+            console.log(2);
+        }
+        else if(game.touch.getY() > game.screenHeight / 2) 
+            window.history.back(-1);
+    }
+}
+
+
 
 
 

@@ -22,3 +22,17 @@ touchHandler.prototype.Draw = function() {
         game.ctx.stroke();
     } 
 }
+
+touchHandler.prototype.getX = function() {
+	for(var i=0; i<this.touches.length; i++) {
+        var touch = this.touches[i];
+        return touch.clientX;
+    } 
+}
+
+touchHandler.prototype.getY = function() {
+	for(var i=0; i<this.touches.length; i++) {
+        var touch = this.touches[i];
+        return touch.clientY;
+    } 
+}
