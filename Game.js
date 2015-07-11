@@ -16,18 +16,17 @@ var requestAnimFrame = (function() {
 function Game() {
     this.screenWidth = window.innerWidth;
     this.screenHeight = window.innerHeight;
+    this.touch = new touchHandler();
     //this.isMultiplayer = false;
 }
 
 function main() {
-
     game = new Game();
-    game.touches = [];
-
     game.level = new Level();
-
     game.initCanvas();
-    game.Draw();
+    
+    game.touch.main();
+
     game.gameLoop();
 
 }
@@ -35,20 +34,15 @@ function main() {
 Game.prototype.initCanvas = function() {
     this.canvas = document.createElement('canvas');
     this.ctx = this.canvas.getContext('2d');
+
     document.body.appendChild(this.canvas);
 
     this.canvas.width = this.screenWidth;
     this.canvas.height  = this.screenHeight;
-    touchable = 'createTouch' in document;
-
-    if(touchable) {
-        this.canvas.addEventListener("onTouchStart",onTouchStart,false);
-        this.canvas.addEventListener("onTouchMove",onTouchMove,false);
-        this.canvas.addEventListener("onTouchEnd",onTouchEnd,false);
-    }
 }
 
 Game.prototype.gameLoop = function() {
+    game.level.setLevel(1);
     game.Draw();
 
     window.requestAnimFrame(game.gameLoop);
@@ -56,7 +50,11 @@ Game.prototype.gameLoop = function() {
 
 Game.prototype.Draw = function() {
     this.ctx.clearRect(0,0,this.screenWidth,this.screenHeight);
-    this.level.Draw();
+
+    game.level.Draw();
+
+    game.touch.Draw()
+    
 }
 
 /*Game.prototype.setMultiplayer = function(state) {
@@ -69,18 +67,15 @@ Game.prototype.Draw = function() {
 
 function onTouchStart(e) {
     e.preventDefault();
-    game.touches = e.touches;
-    console.log("touch start");
+    game.touch.touches = e.touches;
 }
 
 function onTouchMove(e) {
     e.preventDefault();
-    game.touches = e.touches;
-    console.log("touch move");
+    game.touch.touches = e.touches;
 }
 
 function onTouchEnd(e) {
     e.preventDefault();
-    game.touches = e.touches;
-    console.log("touch end");
+    game.touch.touches = e.touches;
 }
