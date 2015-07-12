@@ -1,6 +1,4 @@
 var game;
-var SPLASH_SCREEN = 0, START_SCREEN = 1, LEVEL_ONE = 2, LEVEL_TWO = 3, MAIN_MENU = 4, END_SCREEN =5;
-var startScreen, level_1, level_2;
 
 var requestAnimFrame = (function() {
     return window.requestAnimationFrame    ||
@@ -37,8 +35,9 @@ Game.prototype.initCanvas = function() {
     this.canvas.height  = this.screenHeight;
 }
 
-Game.prototype.gameLoop = function() {    game.Draw();
-    game.checkStartMenuInput();
+Game.prototype.gameLoop = function() {    
+    game.Draw();
+    game.checkLevel();
     window.requestAnimFrame(game.gameLoop);
 }
 
@@ -52,21 +51,31 @@ Game.prototype.Draw = function() {
 
 }*/
 
-
-Game.prototype.checkStartMenuInput = function() {
-    if(game.touch.getX() > game.screenWidth / 2) {
-        //game.level.setLevel(0);
-        console.log("SETTINGS");
+Game.prototype.checkLevel = function() {
+    if(game.level.getLevel() == -1) {
+        //splash screen
     }
-    else if(game.touch.getX() < game.screenWidth / 2) {
-        if(game.touch.getY() < game.screenHeight / 2) {
-            //game.level.setLevel(2);
-            console.log("LEVEL 1");
-        }
-        else if(game.touch.getY() > game.screenHeight / 2) {
-            console.log("EXIT");
-            //window.history.back(-1);
-        }
+    else if(game.level.getLevel() == 0) {
+        //settings
+    }
+    else if(game.level.getLevel() == 1) {
+        game.level.checkStartMenuInput();
+
+    }
+    else if(game.level.getLevel() == 2) {
+        game.level.checkPreGameInput();
+    }
+    else if(game.level.getLevel() == 3) {
+        //select char
+    }
+    else if(game.level.getLevel() == 4) {
+        //level 1
+    }
+    else if(game.level.getLevel() == 5) {
+        //level 2
+    }
+    else if(game.level.getLevel() == 6) {
+        //level 3
     }
 }
 
@@ -88,6 +97,5 @@ function onTouchMove(e) {
 function onTouchEnd(e) {
     e.preventDefault();
     game.touch.touches = e.touches;
-    console.log("HALP");
     //put an end check in here
 }
