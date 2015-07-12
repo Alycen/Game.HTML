@@ -1,10 +1,11 @@
 function infoBox() {
-	this.x;
-	this.y;
-	this.width;
-	this.height;
+	this.x = 10;
+	this.y = 20;
+	this.width = 20;
+	this.height = 20;
 	this.img = new Image();
 	this.isVisible = false;
+
 }
 
 infoBox.prototype.Update = function() {
@@ -12,7 +13,7 @@ infoBox.prototype.Update = function() {
 }
 
 infoBox.prototype.Draw = function() {
-	if(isVisible)
+	if(this.isVisible)
 		game.ctx.drawImage(this.img,this.x,this.y,this.width,this.height);
 }
 
@@ -22,27 +23,27 @@ infoBox.prototype.setInfoBox = function(index) {
 		this.isVisible = false;
 	else if(index == 0) {
 		this.isVisible = true;
-		this.img.src = "assets/gfx/selectPlayerNum.png";
+		this.img.src = "assets/gfx/InfoBox/selectPlayerNum.png";
 	}
 	else if(index == 1) {
 		this.isVisible = true;
-		this.img.src = "assets/gfx/guardianInfo.png";
+		this.img.src = "assets/gfx/InfoBox/guardianInfo.png";
 	}
 	else if(index == 2) {
 		this.isVisible = true;
-		this.img.src = "assets/gfx/adventurerInfo.png";
+		this.img.src = "assets/gfx/InfoBox/adventurerInfo.png";
 	}
 	else if(index == 3) {
 		this.isVisible = true;
-		this.img.src = "assets/gfx/guardianTutorial.png";
+		this.img.src = "assets/gfx/InfoBox/guardianTutorial.png";
 	}
 	else if(index == 4) {
 		this.isVisible = true;
-		this.img.src = "assets/gfx/adventurerTutorial.png";
+		this.img.src = "assets/gfx/InfoBox/adventurerTutorial.png";
 	}
 	else if(index == 5) {
 		this.isVisible = true;
-		this.img.src = "assets/gfx/gameGoal.png";
+		this.img.src = "assets/gfx/InfoBox/gameGoal.png";
 	}
 	else if(index == 6) {
 

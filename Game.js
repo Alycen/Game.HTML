@@ -22,6 +22,7 @@ function main() {
     game = new Game();
     game.level = new Level();
     game.level.setLevel(1);
+    game.infoBox = new infoBox();
     game.initCanvas();
     game.touch.main();
     game.gameLoop();
@@ -44,7 +45,8 @@ Game.prototype.gameLoop = function() {
 Game.prototype.Draw = function() {
     this.ctx.clearRect(0,0,this.screenWidth,this.screenHeight);
     game.level.Draw();
-    game.touch.Draw()
+    game.touch.Draw();
+    game.infoBox.Draw();
 }
 
 /*Game.prototype.setMultiplayer = function(state) {

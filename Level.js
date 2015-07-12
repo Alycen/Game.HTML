@@ -23,7 +23,7 @@ Level.prototype.setLevel = function(lvl) {
 	else if(lvl==1)
 		this.bg.src = "assets/gfx/Background/StartScreen.png"; // Start Menu
 	else if(lvl==2)
-		this.bg.src = "assets/gfx/Background/preGame.png"; // select num of players
+		this.bg.src = "assets/gfx/Background/numOfPlayers.png"; // select num of players
 	else if(lvl==3)
 		this.bg.src = "assets/gfx/Background/charSelect.png";	//select char type
 	else if(lvl==4)
@@ -62,5 +62,11 @@ Level.prototype.checkStartMenuInput = function() {
 Level.prototype.checkPreGameInput = function() {
 	if(game.touch.getY() > game.screenHeight / 1.18) 
 		game.level.setLevel(1);
+	else {
+		if(game.touch.getX() < game.screenWidth / 2)
+			console.log("ONE PLAYER");
+		else if(game.touch.getX() > game.screenWidth / 2)
+			console.log("TWO PLAYERS");
+	}
 }
 
