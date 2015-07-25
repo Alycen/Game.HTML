@@ -19,7 +19,7 @@ Level.prototype.setLevel = function(lvl) {
 	if(lvl==-1)
 		this.bg.src = "assets/gfx/Background/temp.png";	 // Splash Screen
 	else if(lvl==0)
-		this.bg.src = "assets/gfx/Background/settings.png";
+		this.bg.src = "assets/gfx/Background/setting.png";
 	else if(lvl==1)
 		this.bg.src = "assets/gfx/Background/StartScreen.png"; // Start Menu
 	else if(lvl==2)
@@ -43,30 +43,56 @@ Level.prototype.Draw = function() {
 }
 
 Level.prototype.checkStartMenuInput = function() {
-    if(game.touch.getX() > game.screenWidth / 2) {
-        //game.level.setLevel(0);
-        console.log("SETTINGS");
-    }
-    else if(game.touch.getX() < game.screenWidth / 2) {
-        if(game.touch.getY() < game.screenHeight / 2) {
-            game.level.setLevel(2);
-            console.log("LEVEL 1");
-        }
-        else if(game.touch.getY() > game.screenHeight / 2) {
-            console.log("EXIT");
-            window.history.back(-1);
-        }
-    }
-}
-
-Level.prototype.checkPreGameInput = function() {
-	if(game.touch.getY() > game.screenHeight / 1.18) 
-		game.level.setLevel(1);
-	else {
-		if(game.touch.getX() < game.screenWidth / 2)
-			console.log("ONE PLAYER");
-		else if(game.touch.getX() > game.screenWidth / 2)
-			console.log("TWO PLAYERS");
+    if (game.stopTouch == false) {
+    	if(game.touch.getX() > game.screenWidth / 2) {
+        	game.level.setLevel(0);
+        	console.log("SETTINGS");
+       		game.stopTouch = true;
+    	}
+    	else if(game.touch.getX() < game.screenWidth / 2) {
+        	if(game.touch.getY() < game.screenHeight / 2) {
+        	    game.level.setLevel(2);
+            	console.log("CHAR SELECT"); 
+        		game.stopTouch = true;
+        	}
+        	else if(game.touch.getY() > game.screenHeight / 2) {
+        	    console.log("EXIT");
+            	window.history.back(-1);
+        	}
+    	}
 	}
 }
 
+Level.prototype.checkPreGameInput = function() {
+	if (game.stopTouch == false) {
+		if(game.touch.getY() > game.screenHeight / 1.18) {
+			game.level.setLevel(1);
+        	game.stopTouch = true;
+        }
+		else {
+			if(game.touch.getX() < game.screenWidth / 2) {
+				console.log("ONE PLAYER");
+				game.level.setLevel(4);
+				//game.isMultiplayer = false;
+        		game.stopTouch = true;
+			}
+			else if(game.touch.getX() > game.screenWidth / 2) {
+        		game.stopTouch = true;
+				console.log("TWO PLAYERS");
+				//game.isMultiplayer = true;
+			}
+		}
+	}
+}
+
+Level.prototype.checkSettingsInput = function() {
+	if (game.stopTouch == false) {
+		if(game.touch.getY() > game.screenHeight / 1.18) {
+			game.level.setLevel(1);
+        	game.stopTouch = true;
+		}
+		else {
+
+		}
+	}
+}

@@ -15,7 +15,7 @@ function Game() {
     this.screenWidth = window.innerWidth;
     this.screenHeight = window.innerHeight;
     this.touch = new touchHandler();
-    //this.isMultiplayer = false;
+    this.isMultiplayer = false;
 }
 
 function main() {
@@ -58,7 +58,7 @@ Game.prototype.checkLevel = function() {
         //splash screen
     }
     else if(game.level.getLevel() == 0) {
-        //settings
+        game.level.checkSettingsInput();
     }
     else if(game.level.getLevel() == 1) {
         game.level.checkStartMenuInput();
@@ -99,5 +99,6 @@ function onTouchMove(e) {
 function onTouchEnd(e) {
     e.preventDefault();
     game.touch.touches = e.touches;
+    game.stopTouch = false;
     //put an end check in here
 }
