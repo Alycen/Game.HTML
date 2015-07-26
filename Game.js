@@ -57,28 +57,25 @@ Game.prototype.checkLevel = function() {
     if(game.level.getLevel() == -1) {
         //splash screen
     }
-    else if(game.level.getLevel() == 0) {
+    else if(game.level.getLevel() == 0) {   // settings
         game.level.checkSettingsInput();
     }
-    else if(game.level.getLevel() == 1) {
+    else if(game.level.getLevel() == 1) {   // start menu
         game.level.checkStartMenuInput();
 
     }
-    else if(game.level.getLevel() == 2) {
-        game.level.checkPreGameInput();
+    else if(game.level.getLevel() == 2) {   // char select
+        //game.level.checkPreGameInput();
     }
-    else if(game.level.getLevel() == 3) {
-        //select char
+    else if(game.level.getLevel() == 3) {   // Level 1
+        
     }
-    else if(game.level.getLevel() == 4) {
-        //level 1
+    else if(game.level.getLevel() == 4) {   // Level 2
+
     }
-    else if(game.level.getLevel() == 5) {
-        //level 2
-    }
-    else if(game.level.getLevel() == 6) {
-        //level 3
-    }
+    //else if(game.level.getLevel() == 5) {   // Level 3
+
+    //}
 }
 
 
