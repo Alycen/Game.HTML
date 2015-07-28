@@ -7,7 +7,7 @@ touchHandler.prototype.main = function() {
 	this.touchable = 'createTouch' in document;
 	if(this.touchable) {
         game.canvas.addEventListener("touchstart",onTouchStart,false);
-        game.canvas.addEventListener("touchmove",onTouchMove,false);
+        //game.canvas.addEventListener("touchmove",onTouchMove,false);
         game.canvas.addEventListener("touchend",onTouchEnd,false);
 	}
 }
